@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GestorVentas.Datos\GestorVentas.Datos.csproj" />
+    <ProjectReference Include="..\GestorVentas.Entidades\GestorVentas.Entidades.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\Ventas\" />
+    <Folder Include="Models\Usuarios\" />
+  </ItemGroup>
+
+
+</Project>
