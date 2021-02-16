@@ -117,7 +117,7 @@ namespace GestorVentas.Controllers
             return Ok();
         }
 
-
+        //DELETE: api/Categorias/Desactivar/1
         [HttpDelete("[action]/{id}")]
         public async Task<IActionResult> Eliminar([FromRoute] int id)
         {
@@ -141,6 +141,40 @@ namespace GestorVentas.Controllers
             }
             return Ok();
         }
+
+        //PUT: api/Categorias/Desactivar/1
+        [HttpPut("[action]/{id}")]
+        public async Task<IActionResult> Desactivar([FromRoute] int id)
+        {
+            if (id < 0)
+            {
+                return BadRequest();
+            }
+          
+            var categoria = await _contexto.Categorias
+                .FirstOrDefaultAsync(p => p.IdCategoria == id);
+
+            if (categoria == null)
+            {
+                return NotFound();
+            }
+            categoria.Condicion = false;
+           
+            try
+            {
+                await _contexto.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return BadRequest();
+
+            }
+
+            return Ok();
+
+        }
+
+
 
     }
 }
