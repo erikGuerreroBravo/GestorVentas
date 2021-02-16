@@ -1,6 +1,6 @@
 ﻿namespace GestorVentas.Models.Almacen
 {
-    public class CategoriaVM
+    public class CategoriaActualziarVM
     {
         public int IdCategoria { get; set; }
         public string Nombre { get; set; }

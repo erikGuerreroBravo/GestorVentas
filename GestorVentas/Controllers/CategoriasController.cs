@@ -1,4 +1,5 @@
 ﻿using GestorVentas.Datos;
+using GestorVentas.Entidades.Almacen;
 using GestorVentas.Models.Almacen;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,10 +22,10 @@ namespace GestorVentas.Controllers
 
         //Get:api/Categorias/Listar
         [HttpGet("[action]")]
-        public async Task<IEnumerable<CategoriaVM>> Listar()
+        public async Task<IEnumerable<CategoriaActualziarVM>> Listar()
         {
             var categoria = await _contexto.Categorias.ToListAsync();
-            return categoria.Select(p => new CategoriaVM
+            return categoria.Select(p => new CategoriaActualziarVM
             {
                 IdCategoria = p.IdCategoria,
                 Nombre = p.Nombre,
@@ -43,13 +44,102 @@ namespace GestorVentas.Controllers
             {
                 return NotFound();
             }
-            return Ok(new CategoriaVM
+            return Ok(new CategoriaActualziarVM
             {
                 IdCategoria = categoria.IdCategoria,
                 Nombre = categoria.Nombre,
                 Descripcion = categoria.Descripcion,
                 Condicion = categoria.Condicion
             });
+        }
+
+
+        [HttpPut("[action]")]
+        public async Task<IActionResult> Actualizar([FromBody] CategoriaActualziarVM model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (model.IdCategoria < 0)
+            {
+                return BadRequest();
+            }
+            var categoria = await _contexto.Categorias
+                .FirstOrDefaultAsync(p => p.IdCategoria == model.IdCategoria);
+
+            if (categoria == null)
+            {
+                return NotFound();
+            }
+            categoria.Nombre = model.Nombre;
+            categoria.Descripcion = model.Descripcion;
+
+            try
+            {
+                await _contexto.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return BadRequest();
+               
+            }
+
+            return Ok();
+
+        }
+
+
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Crear([FromBody] CategoriaCrearVM model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            Categoria categoria = new Categoria
+            {
+                Nombre = model.Nombre,
+                Descripcion = model.Descripcion,
+                Condicion = true
+            };
+            _contexto.Categorias.Add(categoria);
+            try
+            {
+                await _contexto.SaveChangesAsync();
+            }
+            catch (System.Exception ex)
+            {
+                string mensaje = ex.Message;
+                return BadRequest();
+            }
+
+            return Ok();
+        }
+
+
+        [HttpDelete("[action]/{id}")]
+        public async Task<IActionResult> Eliminar([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var categoria = await _contexto.Categorias.FindAsync(id);
+            if (categoria == null)
+            {
+                return NotFound();
+            }
+            _contexto.Categorias.Remove(categoria);
+            try
+            {
+                await _contexto.SaveChangesAsync();
+            }
+            catch (System.Exception)
+            {
+                return BadRequest();
+            }
+            return Ok();
         }
 
     }
