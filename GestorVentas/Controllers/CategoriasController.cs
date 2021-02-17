@@ -61,7 +61,7 @@ namespace GestorVentas.Controllers
             {
                 return BadRequest(ModelState);
             }
-            if (model.IdCategoria < 0)
+            if (model.IdCategoria <= 0)
             {
                 return BadRequest();
             }
@@ -146,7 +146,7 @@ namespace GestorVentas.Controllers
         [HttpPut("[action]/{id}")]
         public async Task<IActionResult> Desactivar([FromRoute] int id)
         {
-            if (id < 0)
+            if (id <= 0)
             {
                 return BadRequest();
             }
@@ -174,7 +174,37 @@ namespace GestorVentas.Controllers
 
         }
 
+        //PUT: api/Categorias/Activar/1
+        [HttpPut("[action]/{id}")]
+        public async Task<IActionResult> Activar([FromRoute] int id)
+        {
+            if (id <= 0)
+            {
+                return BadRequest();
+            }
 
+            var categoria = await _contexto.Categorias
+                .FirstOrDefaultAsync(p => p.IdCategoria == id);
+
+            if (categoria == null)
+            {
+                return NotFound();
+            }
+            categoria.Condicion = true;
+
+            try
+            {
+                await _contexto.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return BadRequest();
+
+            }
+
+            return Ok();
+
+        }
 
     }
 }

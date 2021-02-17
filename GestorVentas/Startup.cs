@@ -30,6 +30,11 @@ namespace GestorVentas
             services.AddControllers();
             services.AddDbContext<Contexto>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
+            services.AddCors(options => {
+
+                options.AddPolicy("Todos",
+                    builder => builder.WithOrigins("*").WithHeaders("*").WithMethods("*"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,6 +45,7 @@ namespace GestorVentas
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors("Todos");
             app.UseHttpsRedirection();
 
             app.UseRouting();
