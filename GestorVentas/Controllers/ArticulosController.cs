@@ -1,4 +1,5 @@
 ﻿using GestorVentas.Datos;
+using GestorVentas.Entidades.Almacen;
 using GestorVentas.Models.Almacen.Articulo;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -66,21 +67,26 @@ namespace GestorVentas.Controllers
 
             
         }
-
+        //POST:api/Articulos/Crear
         [HttpPost("[action]")]
-        public async Task<IActionResult> Crear([FromBody] CategoriaCrearVM model)
+        public async Task<IActionResult> Crear([FromBody] ArticuloCrearVM model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            Categoria categoria = new Categoria
-            {
+            Articulo articulo = new Articulo {
+                IdCategoria = model.IdCategoria,
+                Codigo = model.Codigo,
                 Nombre = model.Nombre,
+                Precio_Venta = model.Precio_Venta,
+                Stock = model.Stock,
                 Descripcion = model.Descripcion,
-                Condicion = true
+                Condicion = true,
+            
+            
             };
-            _contexto.Categorias.Add(categoria);
+            _contexto.Articulos.Add(articulo);
             try
             {
                 await _contexto.SaveChangesAsync();
@@ -134,6 +140,66 @@ namespace GestorVentas.Controllers
         }
 
 
+        //PUT: api/Articulos/Desactivar/1
+        [HttpPut("[action]/{id}")]
+        public async Task<IActionResult> Desactivar([FromRoute] int id)
+        {
+            if (id <= 0)
+            {
+                return BadRequest();
+            }
+
+            var articulo = await _contexto.Articulos.FirstOrDefaultAsync(p=> p.IdArticulo == id);
+            
+            if (articulo == null)
+            {
+                return NotFound();
+            }
+            articulo.Condicion = false;
+
+            try
+            {
+                await _contexto.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return BadRequest();
+
+            }
+
+            return Ok();
+
+        }
+
+        //PUT: api/Articulos/Activar/1
+        [HttpPut("[action]/{id}")]
+        public async Task<IActionResult> Activar([FromRoute] int id)
+        {
+            if (id <= 0)
+            {
+                return BadRequest();
+            }
+            var articulo = await _contexto.Articulos.FirstOrDefaultAsync(p => p.IdArticulo == id);
+
+            if (articulo == null)
+            {
+                return NotFound();
+            }
+            articulo.Condicion = true;
+
+            try
+            {
+                await _contexto.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return BadRequest();
+
+            }
+
+            return Ok();
+
+        }
 
 
         public bool ArticuloExists(int id)
