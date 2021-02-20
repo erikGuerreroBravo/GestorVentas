@@ -26,14 +26,14 @@ namespace GestorVentas.Controllers
         public async Task<IEnumerable<ArticuloVM>> Listar()
         {
             
-            var articulos = await _contexto.Articulos.ToListAsync();
+            var articulos = await _contexto.Articulos.Include(a=>a.Categoria).ToListAsync();
             return articulos.Select(a => new ArticuloVM
             {
                 IdArticulo = a.IdArticulo,
                 IdCategoria = a.IdCategoria,
                 Codigo = a.Codigo,
                 Nombre= a.Nombre,
-                Precio_Venta = a.PrecioVenta,
+                Precio_Venta = a.Precio_Venta,
                 Stock =a.Stock,
                 Descripcion = a.Descripcion,
                 Condicion = a.Condicion,
@@ -56,7 +56,7 @@ namespace GestorVentas.Controllers
                 IdCategoria = articulo.IdCategoria,
                 Codigo = articulo.Codigo,
                 Nombre = articulo.Nombre,
-                Precio_Venta = articulo.PrecioVenta,
+                Precio_Venta = articulo.Precio_Venta,
                 Stock = articulo.Stock,
                 Descripcion = articulo.Descripcion,
                 Condicion = articulo.Condicion,

@@ -10,8 +10,8 @@ namespace GestorVentas.Datos.Mapping.Almacen
         {
             builder.ToTable("categoria")
                 .HasKey(c => c.IdCategoria);
-            //builder.Property(c => c.Nombre).HasMaxLength(50);
-            //builder.Property(c => c.Descripcion).HasMaxLength(256);
+            builder.Property(c => c.Nombre).HasMaxLength(50);
+            builder.Property(c => c.Descripcion).HasMaxLength(256);
         }
     }
 }
