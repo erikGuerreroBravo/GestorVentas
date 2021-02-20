@@ -7,6 +7,7 @@ namespace GestorVentas.Datos
     public class Contexto:DbContext
     {
         public DbSet<Categoria> Categorias { get; set; }
+        public DbSet<Articulo> Articulos { get; set; }
 
         public Contexto(DbContextOptions<Contexto> options):base(options)
         {
@@ -16,6 +17,7 @@ namespace GestorVentas.Datos
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new CaterogiaMap());
+            modelBuilder.ApplyConfiguration(new ArticuloMap());
         }
 
     }
