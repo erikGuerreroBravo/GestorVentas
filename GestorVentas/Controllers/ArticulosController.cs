@@ -67,14 +67,71 @@ namespace GestorVentas.Controllers
             
         }
 
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Crear([FromBody] CategoriaCrearVM model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            Categoria categoria = new Categoria
+            {
+                Nombre = model.Nombre,
+                Descripcion = model.Descripcion,
+                Condicion = true
+            };
+            _contexto.Categorias.Add(categoria);
+            try
+            {
+                await _contexto.SaveChangesAsync();
+            }
+            catch (System.Exception ex)
+            {
+                string mensaje = ex.Message;
+                return BadRequest();
+            }
 
+            return Ok();
+        }
+        //PUT: api/Articulos/Actualizar
+        [HttpPut("[action]")]
+        public async Task<IActionResult> Actualizar([FromBody] ArticuloActualizarVM model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (model.IdArticulo <= 0)
+            {
+                return BadRequest();
+            }
 
+            var articulo = await _contexto.Articulos.
+                FirstOrDefaultAsync(p => p.IdArticulo == model.IdArticulo);
+           
+            if (articulo == null)
+            {
+                return NotFound();
+            }
+            articulo.IdCategoria = model.IdCategoria;
+            articulo.Codigo = model.Codigo;
+            articulo.Nombre = model.Nombre;
+            articulo.Precio_Venta = model.Precio_Venta;
+            articulo.Stock = model.Stock;
+            articulo.Descripcion = model.Descripcion;
+            try
+            {
+                await _contexto.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return BadRequest();
 
+            }
 
+            return Ok();
 
-
-
-
+        }
 
 
 
