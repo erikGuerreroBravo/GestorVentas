@@ -17,7 +17,7 @@ namespace GestorVentas.Models.Almacen.Articulo
         
         public string Nombre { get; set; }
        
-        public double Precio_Venta { get; set; }
+        public decimal Precio_Venta { get; set; }
         
         public int Stock { get; set; }
         public string Descripcion { get; set; }

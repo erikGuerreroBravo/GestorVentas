@@ -69,5 +69,22 @@ namespace GestorVentas.Controllers
 
 
 
+
+
+
+
+
+
+
+
+
+
+        public bool ArticuloExists(int id)
+        {
+            return _contexto.Articulos.Any(e => e.IdArticulo == id);
+        }
+
+
+
     }
 }

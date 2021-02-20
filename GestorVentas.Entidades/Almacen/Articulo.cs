@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GestorVentas.Entidades.Almacen
 {
@@ -6,7 +7,7 @@ namespace GestorVentas.Entidades.Almacen
     {
         public int IdArticulo  { get; set; }
 
-        //[Required]
+        [Required]
         public int IdCategoria { get; set; }
 
         public string Codigo { get; set; }
@@ -14,14 +15,15 @@ namespace GestorVentas.Entidades.Almacen
         [StringLength(50, MinimumLength = 3, ErrorMessage = "El Nombre del articulo es requerido")]
         public string Nombre { get; set; }
         
-        //[Required]
-        public double Precio_Venta { get; set; }
+        [Required]
+        public decimal Precio_Venta { get; set; }
         
         [Required]
         public int Stock { get; set; }
         public string Descripcion { get; set; }
         public bool  Condicion{ get; set; }
 
+        [ForeignKey("idcategoria")]
         public Categoria Categoria { get; set; }
     }
 }
