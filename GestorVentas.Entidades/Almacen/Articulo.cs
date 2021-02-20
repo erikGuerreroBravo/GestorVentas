@@ -7,6 +7,7 @@ namespace GestorVentas.Entidades.Almacen
         public int IdArticulo  { get; set; }
         [Required]
         public int IdCategoria { get; set; }
+
         public string Codigo { get; set; }
         [Required]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "El Nombre del articulo es requerido")]
