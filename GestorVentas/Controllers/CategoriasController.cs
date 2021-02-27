@@ -1,6 +1,7 @@
 ﻿using GestorVentas.Datos;
 using GestorVentas.Entidades.Almacen;
 using GestorVentas.Models.Almacen;
+using GestorVentas.Models.Almacen.Categoria;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -37,10 +38,10 @@ namespace GestorVentas.Controllers
 
         //Get:api/Categorias/Listar
         [HttpGet("[action]")]
-        public async Task<IEnumerable<CategoriaVM>> Seleccionar()
+        public async Task<IEnumerable<SelectCategoriaVM>> Seleccionar()
         {
             var categoria = await _contexto.Categorias.Where(c=> c.Condicion== true).ToListAsync();
-            return categoria.Select(p => new CategoriaVM
+            return categoria.Select(p => new SelectCategoriaVM
             {
                 IdCategoria = p.IdCategoria,
                 Nombre = p.Nombre,
