@@ -39,13 +39,12 @@ namespace GestorVentas.Controllers
         [HttpGet("[action]")]
         public async Task<IEnumerable<CategoriaVM>> Seleccionar()
         {
-            var categoria = await _contexto.Categorias.ToListAsync();
+            var categoria = await _contexto.Categorias.Where(c=> c.Condicion== true).ToListAsync();
             return categoria.Select(p => new CategoriaVM
             {
                 IdCategoria = p.IdCategoria,
                 Nombre = p.Nombre,
-                Descripcion = p.Descripcion,
-                Condicion = p.Condicion
+                
             });
 
         }

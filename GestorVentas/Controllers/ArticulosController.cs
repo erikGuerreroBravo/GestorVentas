@@ -94,7 +94,7 @@ namespace GestorVentas.Controllers
             catch (System.Exception ex)
             {
                 string mensaje = ex.Message;
-                return BadRequest();
+                return BadRequest(mensaje);
             }
 
             return Ok();
