@@ -22,10 +22,10 @@ namespace GestorVentas.Controllers
 
         //Get:api/Categorias/Listar
         [HttpGet("[action]")]
-        public async Task<IEnumerable<CategoriaActualziarVM>> Listar()
+        public async Task<IEnumerable<CategoriaVM>> Listar()
         {
             var categoria = await _contexto.Categorias.ToListAsync();
-            return categoria.Select(p => new CategoriaActualziarVM
+            return categoria.Select(p => new CategoriaVM
             {
                 IdCategoria = p.IdCategoria,
                 Nombre = p.Nombre,
@@ -34,6 +34,24 @@ namespace GestorVentas.Controllers
             });
            
         }
+
+        //Get:api/Categorias/Listar
+        [HttpGet("[action]")]
+        public async Task<IEnumerable<CategoriaVM>> Seleccionar()
+        {
+            var categoria = await _contexto.Categorias.ToListAsync();
+            return categoria.Select(p => new CategoriaVM
+            {
+                IdCategoria = p.IdCategoria,
+                Nombre = p.Nombre,
+                Descripcion = p.Descripcion,
+                Condicion = p.Condicion
+            });
+
+        }
+
+
+
 
         //Get:api/Categorias/Mostrar/7
         [HttpGet("[action]/{id}")]
@@ -44,7 +62,7 @@ namespace GestorVentas.Controllers
             {
                 return NotFound();
             }
-            return Ok(new CategoriaActualziarVM
+            return Ok(new CategoriaVM
             {
                 IdCategoria = categoria.IdCategoria,
                 Nombre = categoria.Nombre,
@@ -55,7 +73,7 @@ namespace GestorVentas.Controllers
 
 
         [HttpPut("[action]")]
-        public async Task<IActionResult> Actualizar([FromBody] CategoriaActualziarVM model)
+        public async Task<IActionResult> Actualizar([FromBody] CategoriaActualizarVM model)
         {
             if (!ModelState.IsValid)
             {
@@ -111,7 +129,7 @@ namespace GestorVentas.Controllers
             catch (System.Exception ex)
             {
                 string mensaje = ex.Message;
-                return BadRequest();
+                return BadRequest(mensaje);
             }
 
             return Ok();
