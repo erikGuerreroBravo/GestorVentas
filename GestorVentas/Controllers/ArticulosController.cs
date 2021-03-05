@@ -1,6 +1,7 @@
 ﻿using GestorVentas.Datos;
 using GestorVentas.Entidades.Almacen;
 using GestorVentas.Models.Almacen.Articulo;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,7 @@ namespace GestorVentas.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[EnableCors("Todos")]
     public class ArticulosController : ControllerBase
     {
         private readonly Contexto _contexto;
@@ -27,7 +29,7 @@ namespace GestorVentas.Controllers
         public async Task<IEnumerable<ArticuloVM>> Listar()
         {
             
-            var articulos = await _contexto.Articulos.Include(a=>a.Categoria).ToListAsync();
+            var articulos = await _contexto.Articulos.Include(a => a.Categoria).ToListAsync();///
             return articulos.Select(a => new ArticuloVM
             {
                 IdArticulo = a.IdArticulo,
@@ -75,7 +77,10 @@ namespace GestorVentas.Controllers
             {
                 return BadRequest(ModelState);
             }
+
+            Categoria categoria = new Categoria { IdCategoria = model.IdCategoria, Condicion = true };
             Articulo articulo = new Articulo {
+               
                 IdCategoria = model.IdCategoria,
                 Codigo = model.Codigo,
                 Nombre = model.Nombre,
@@ -83,8 +88,7 @@ namespace GestorVentas.Controllers
                 Stock = model.Stock,
                 Descripcion = model.Descripcion,
                 Condicion = true,
-            
-            
+                Categoria = categoria
             };
             _contexto.Articulos.Add(articulo);
             try

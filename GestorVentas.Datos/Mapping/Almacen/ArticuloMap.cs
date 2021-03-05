@@ -8,7 +8,11 @@ namespace GestorVentas.Datos.Mapping.Almacen
     {
         public void Configure(EntityTypeBuilder<Articulo> builder)
         {
-            builder.ToTable("articulo").HasKey(a => a.IdArticulo);
+           
+            builder.ToTable("articulo")
+                .HasKey(a => a.IdArticulo);
+                
+           
         }
     }
 }

@@ -32,8 +32,9 @@ namespace GestorVentas
             options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
             services.AddCors(options => {
 
-                options.AddPolicy("Todos",
-                    builder => builder.WithOrigins("*").WithHeaders("*").WithMethods("*"));
+            options.AddPolicy("Todos",
+                
+                builder => builder.WithOrigins("*").WithHeaders("*").WithMethods("*"));
             });
         }
 
@@ -46,6 +47,7 @@ namespace GestorVentas
             }
 
             app.UseCors("Todos");
+           
             app.UseHttpsRedirection();
 
             app.UseRouting();
