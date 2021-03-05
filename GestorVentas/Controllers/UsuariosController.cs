@@ -88,6 +88,63 @@ namespace GestorVentas.Controllers
             return Ok();
         }
 
+        // PUT: api/Usuarios/Actualizar
+        [HttpPut("[action]")]
+        public async Task<IActionResult> Actualizar([FromBody] UsuarioActualizarVM model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (model.IdUsuario <= 0)
+            {
+                return BadRequest();
+            }
+
+            var usuario = await _contexto.Usuarios.FirstOrDefaultAsync(u => u.IdUsuario == model.IdUsuario);
+
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+
+            usuario.IdRol = model.IdRol;
+            usuario.Nombre = model.Nombre;
+            usuario.Tipo_Documento = model.Tipo_Documento;
+            usuario.Num_Documento = model.Num_Documento;
+            usuario.Direccion = model.Direccion;
+            usuario.Telefono = model.Telefono;
+            usuario.Email = model.Email.ToLower();
+
+            if (model.Act_Password == true)
+            {
+                CrearPasswordHash(model.Password, out byte[] passwordHash, out byte[] passwordSalt);
+                usuario.Password_Hash = passwordHash;
+                usuario.Password_Salt = passwordSalt;
+            }
+
+            try
+            {
+                await _contexto.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                // Guardar Excepción
+                return BadRequest();
+            }
+
+            return Ok();
+        }
+
+
+
+
+
+
+
+
+
         private void CrearPasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             using (var hmac = new System.Security.Cryptography.HMACSHA512())
