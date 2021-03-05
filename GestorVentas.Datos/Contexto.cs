@@ -11,6 +11,7 @@ namespace GestorVentas.Datos
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Articulo> Articulos { get; set; }
         public DbSet<Rol> Roles { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
 
         public Contexto(DbContextOptions<Contexto> options):base(options)
         {
@@ -24,6 +25,7 @@ namespace GestorVentas.Datos
             modelBuilder.ApplyConfiguration(new CaterogiaMap());
             modelBuilder.ApplyConfiguration(new ArticuloMap());
             modelBuilder.ApplyConfiguration(new RolMap());
+            modelBuilder.ApplyConfiguration(new UsuarioMap());
         }
 
     }
