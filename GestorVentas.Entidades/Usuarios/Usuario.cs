@@ -20,7 +20,7 @@ namespace GestorVentas.Entidades.Usuarios
         public byte[] Password_Hash { get; set; }
         [Required]
         public byte[] Password_Salt { get; set; }
-        public bool condicion { get; set; }
+        public bool Condicion { get; set; }
         
         public Rol Rol { get; set; }
 

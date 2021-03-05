@@ -138,12 +138,69 @@ namespace GestorVentas.Controllers
         }
 
 
+        // PUT: api/Usuarios/Desactivar/1
+        [HttpPut("[action]/{id}")]
+        public async Task<IActionResult> Desactivar([FromRoute] int id)
+        {
 
+            if (id <= 0)
+            {
+                return BadRequest();
+            }
 
+            var usuario = await _contexto.Usuarios.FirstOrDefaultAsync(u => u.IdUsuario == id);
 
+            if (usuario == null)
+            {
+                return NotFound();
+            }
 
+            usuario.Condicion = false;
 
+            try
+            {
+                await _contexto.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                // Guardar Excepción
+                return BadRequest();
+            }
 
+            return Ok();
+        }
+
+        // PUT: api/Usuarios/Activar/1
+        [HttpPut("[action]/{id}")]
+        public async Task<IActionResult> Activar([FromRoute] int id)
+        {
+
+            if (id <= 0)
+            {
+                return BadRequest();
+            }
+
+            var usuario = await _contexto.Usuarios.FirstOrDefaultAsync(u => u.IdUsuario == id);
+
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+
+            usuario.Condicion = true;
+
+            try
+            {
+                await _contexto.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                // Guardar Excepción
+                return BadRequest();
+            }
+
+            return Ok();
+        }
 
         private void CrearPasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {

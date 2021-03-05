@@ -17,6 +17,6 @@ namespace GestorVentas.Models.Usuarios.Usuario
         public string Telefono { get; set; }
         public string Email { get; set; }
         public byte[] Password_Hash { get; set; }
-        public bool condicion { get; set; }
+        public bool Condicion { get; set; }
     }
 }
