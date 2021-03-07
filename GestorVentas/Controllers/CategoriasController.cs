@@ -107,7 +107,7 @@ namespace GestorVentas.Controllers
 
         }
 
-
+        //POST: api/Categorias/Crear
         [HttpPost("[action]")]
         public async Task<IActionResult> Crear([FromBody] CategoriaCrearVM model)
         {

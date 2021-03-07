@@ -26,7 +26,7 @@ namespace GestorVentas.Controllers
         [HttpGet("[action]")]
         public async Task<IEnumerable<UsuarioVM>> Listar()
         {
-            var usuarios = await _contexto.Usuarios.ToListAsync();
+            var usuarios = await _contexto.Usuarios.Include(u=>u.Rol).ToListAsync();
             return usuarios.Select(u => new UsuarioVM
             {
                  IdUsuario = u.IdUsuario,
@@ -39,7 +39,7 @@ namespace GestorVentas.Controllers
                  Telefono =u.Telefono,
                  Email =u.Email,
                  Password_Hash =u.Password_Hash,
-                 condicion =u.condicion
+                 Condicion =u.Condicion
             });
 
         }
@@ -70,7 +70,7 @@ namespace GestorVentas.Controllers
                 Direccion = model.Direccion,
                 Telefono = model.Telefono,
                 Email = model.Email.ToLower(),
-                condicion= true,
+                Condicion= true,
                 Password_Hash = passwordHash,
                 Password_Salt = passwordSalt
             };
