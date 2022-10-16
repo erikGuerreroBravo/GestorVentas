@@ -18,8 +18,6 @@ namespace GestorVentas.Datos
 
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        
-        
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new CaterogiaMap());

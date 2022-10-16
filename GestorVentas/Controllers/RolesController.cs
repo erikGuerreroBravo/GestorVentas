@@ -40,7 +40,16 @@ namespace GestorVentas.Controllers
         [HttpGet("[action]")]
         public async Task<IEnumerable<SelectRolVM>> Seleccionar()
         {
-            var roles = await _contexto.Roles.Where(c => c.Condicion == true).ToListAsync();
+            var roles = await _contexto.Roles.
+                Where(c => c.Condicion == true)
+               .ToListAsync();
+
+            var q = from c in _contexto.Roles
+                    where (c.Condicion == true)
+                    select c;
+
+            var rol = await _contexto.Roles.Where(x => x.Condicion == true).ToListAsync();
+
             return roles.Select(p => new SelectRolVM
             {
                 IdRol = p.IdRol,

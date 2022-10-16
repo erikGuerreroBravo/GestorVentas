@@ -31,7 +31,7 @@ namespace GestorVentas
             services.AddDbContext<Contexto>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
             services.AddCors(options => {
-
+            //servicios activados de cors
             options.AddPolicy("Todos",
                 
                 builder => builder.WithOrigins("*").WithHeaders("*").WithMethods("*"));
