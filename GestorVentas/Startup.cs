@@ -45,7 +45,7 @@ namespace GestorVentas
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            //implementacion de cors para el acceso de peticiones remotas.
             app.UseCors("Todos");
            
             app.UseHttpsRedirection();
