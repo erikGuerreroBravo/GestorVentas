@@ -29,7 +29,9 @@ namespace GestorVentas.Controllers
         public async Task<IEnumerable<ArticuloVM>> Listar()
         {
             
-            var articulos = await _contexto.Articulos.Include(a => a.Categoria).ToListAsync();///
+            var articulos = 
+                await _contexto.Articulos
+                .Include(a => a.Categoria).ToListAsync();///
             return articulos.Select(a => new ArticuloVM
             {
                 IdArticulo = a.IdArticulo,
@@ -48,7 +50,9 @@ namespace GestorVentas.Controllers
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> Mostrar([FromRoute] int id)
         {
-            var articulo = await _contexto.Articulos.Include(a =>a.Categoria).SingleOrDefaultAsync(a =>a.IdArticulo==id);
+            var articulo = await _contexto.Articulos
+                .Include(a =>a.Categoria)
+                .SingleOrDefaultAsync(a =>a.IdArticulo==id);
             if (articulo == null)
             {
                 return NotFound();
@@ -77,7 +81,6 @@ namespace GestorVentas.Controllers
             {
                 return BadRequest(ModelState);
             }
-
             Categoria categoria = new Categoria { IdCategoria = model.IdCategoria, Condicion = true };
             Articulo articulo = new Articulo {
                
@@ -100,7 +103,6 @@ namespace GestorVentas.Controllers
                 string mensaje = ex.Message;
                 return BadRequest(mensaje);
             }
-
             return Ok();
         }
         //PUT: api/Articulos/Actualizar

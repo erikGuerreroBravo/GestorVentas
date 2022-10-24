@@ -44,12 +44,7 @@ namespace GestorVentas.Controllers
                 Where(c => c.Condicion == true)
                .ToListAsync();
 
-            var q = from c in _contexto.Roles
-                    where (c.Condicion == true)
-                    select c;
-
-            var rol = await _contexto.Roles.Where(x => x.Condicion == true).ToListAsync();
-
+           
             return roles.Select(p => new SelectRolVM
             {
                 IdRol = p.IdRol,

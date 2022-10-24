@@ -7,7 +7,7 @@ namespace GestorVentas.Datos.Mapping.Almacen
     public class ArticuloMap : IEntityTypeConfiguration<Articulo>
     {
         public void Configure(EntityTypeBuilder<Articulo> builder)
-        {
+        { 
            
             builder.ToTable("articulo")
                 .HasKey(a => a.IdArticulo);
