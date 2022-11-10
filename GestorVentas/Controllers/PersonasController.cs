@@ -103,6 +103,59 @@ namespace GestorVentas.Controllers
             return Ok();
         }
 
+
+        // PUT: api/Personas/Actualizar
+        [HttpPut("[action]")]
+        public async Task<IActionResult> Actualizar([FromBody] PersonasActualizarVM model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (model.idPersona <= 0)
+            {
+                return BadRequest();
+            }
+
+            var persona = await _contexto.Personas.FirstOrDefaultAsync(u => u.idPersona == model.idPersona);
+
+            if (persona == null)
+            {
+                return NotFound();
+            }
+
+            usuario.IdRol = model.IdRol;
+            usuario.Nombre = model.Nombre;
+            usuario.Tipo_Documento = model.Tipo_Documento;
+            usuario.Num_Documento = model.Num_Documento;
+            usuario.Direccion = model.Direccion;
+            usuario.Telefono = model.Telefono;
+            usuario.Email = model.Email.ToLower();
+
+            if (model.Act_Password == true)
+            {
+                CrearPasswordHash(model.Password, out byte[] passwordHash, out byte[] passwordSalt);
+                usuario.Password_Hash = passwordHash;
+                usuario.Password_Salt = passwordSalt;
+            }
+
+            try
+            {
+                await _contexto.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                // Guardar Excepción
+                return BadRequest();
+            }
+
+            return Ok();
+        }
+
+
+
+
         private bool PersonaExists(int id)
         {
             return _contexto.Personas.Any(e => e.idPersona == id);
