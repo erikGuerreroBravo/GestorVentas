@@ -3,6 +3,7 @@ using GestorVentas.Datos.Mapping.Usuarios;
 using GestorVentas.Datos.Mapping.Ventas;
 using GestorVentas.Entidades.Almacen;
 using GestorVentas.Entidades.Usuarios;
+using GestorVentas.Entidades.Ventas;
 using Microsoft.EntityFrameworkCore;
 
 namespace GestorVentas.Datos
@@ -14,6 +15,7 @@ namespace GestorVentas.Datos
         public DbSet<Rol> Roles { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
 
+        public DbSet<Persona> Personas { get; set; }
         public Contexto(DbContextOptions<Contexto> options):base(options)
         {
 
