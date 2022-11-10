@@ -63,7 +63,7 @@ namespace GestorVentas.Controllers
         }
 
 
-        //POST: api/Usuarios/Crear
+        //POST: api/Personas/Crear
         [HttpPost("[action]")]
         public async Task<IActionResult> Crear([FromBody] CrearVM model)
         {
