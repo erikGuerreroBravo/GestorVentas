@@ -19,9 +19,7 @@ namespace GestorVentas.Entidades.Ventas
         public string direccion { get; set; }
         public string telefono { get; set; }
         public string email { get; set; }
-        public byte[] password_hash { get; set; }
-        public byte[] password_salt { get; set; }
-        public bool condicion { get; set; }
+        
 
     }
 }
