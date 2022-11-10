@@ -26,7 +26,7 @@ namespace GestorVentas.Controllers
             return _contexto.Personas;
         }
 
-        //Get:api/Usuarios/Listar
+        //Get:api/Usuarios/ListarClientes
         [HttpGet("[action]")]
         public async Task<IEnumerable<PersonaVM>> ListarClientes()
         {
