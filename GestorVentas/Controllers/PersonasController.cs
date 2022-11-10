@@ -77,23 +77,19 @@ namespace GestorVentas.Controllers
             {
                 return BadRequest("El email ya existe");
             }
-
-            CrearPasswordHash(model.Password, out byte[] passwordHash, out byte[] passwordSalt);
-
-            Usuario usuario = new Usuario
+            Persona persona = new Persona
             {
-                IdRol = model.IdRol,
-                Nombre = model.Nombre,
-                Tipo_Documento = model.Tipo_Documento,
-                Num_Documento = model.Num_Documento,
-                Direccion = model.Direccion,
-                Telefono = model.Telefono,
-                Email = model.Email.ToLower(),
-                Condicion = true,
-                Password_Hash = passwordHash,
-                Password_Salt = passwordSalt
+                tipo_persona = model.tipo_persona,
+                nombre = model.nombre,
+                tipo_documento = model.tipo_documento,
+                num_documento = model.num_documento,
+                direccion = model.direccion,
+                telefono = model.telefono,
+                email = model.email.ToLower(),
+                condicion = true,
+                
             };
-            _contexto.Usuarios.Add(usuario);
+            _contexto.Personas.Add(persona);
             try
             {
                 await _contexto.SaveChangesAsync();
@@ -106,10 +102,6 @@ namespace GestorVentas.Controllers
 
             return Ok();
         }
-
-
-
-
 
         private bool PersonaExists(int id)
         {
