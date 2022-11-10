@@ -28,22 +28,19 @@ namespace GestorVentas.Controllers
 
         //Get:api/Usuarios/Listar
         [HttpGet("[action]")]
-        public async Task<IEnumerable<PersonaVM>> Listar()
+        public async Task<IEnumerable<PersonaVM>> ListarClientes()
         {
-            var personas = await _contexto.Personas.ToListAsync();
-            return usuarios.Select(u => new PersonaVM
+            var personas = await _contexto.Personas.Where(p=> p.tipo_persona=="Clientes").ToListAsync();
+            return personas.Select(p => new PersonaVM
             {
-                IdUsuario = u.IdUsuario,
-                IdRol = u.IdRol,
-                Rol = u.Rol.Nombre,
-                Nombre = u.Nombre,
-                Tipo_Documento = u.Tipo_Documento,
-                Num_Documento = u.Num_Documento,
-                Direccion = u.Direccion,
-                Telefono = u.Telefono,
-                Email = u.Email,
-                Password_Hash = u.Password_Hash,
-                Condicion = u.Condicion
+                idPersona = p.idPersona,
+                tipo_persona = p.tipo_persona,
+                nombre = p.nombre,
+                tipo_documento= p.tipo_documento,
+                num_documento=p.num_documento,
+                direccion=p.direccion, 
+                telefono=p.telefono,
+                email=p.email,
             });
 
         }
