@@ -117,29 +117,20 @@ namespace GestorVentas.Controllers
             {
                 return BadRequest();
             }
-
             var persona = await _contexto.Personas.FirstOrDefaultAsync(u => u.idPersona == model.idPersona);
-
             if (persona == null)
             {
                 return NotFound();
             }
 
-            usuario.IdRol = model.IdRol;
-            usuario.Nombre = model.Nombre;
-            usuario.Tipo_Documento = model.Tipo_Documento;
-            usuario.Num_Documento = model.Num_Documento;
-            usuario.Direccion = model.Direccion;
-            usuario.Telefono = model.Telefono;
-            usuario.Email = model.Email.ToLower();
-
-            if (model.Act_Password == true)
-            {
-                CrearPasswordHash(model.Password, out byte[] passwordHash, out byte[] passwordSalt);
-                usuario.Password_Hash = passwordHash;
-                usuario.Password_Salt = passwordSalt;
-            }
-
+            
+            persona.nombre = model.nombre;
+            persona.tipo_documento = model.tipo_documento;
+            persona.num_documento = model.num_documento;
+            persona.direccion = model.direccion;
+            persona.telefono = model.telefono;
+            persona.email = model.email.ToLower();
+            
             try
             {
                 await _contexto.SaveChangesAsync();
