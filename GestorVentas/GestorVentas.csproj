@@ -9,9 +9,5 @@
     <ProjectReference Include="..\GestorVentas.Entidades\GestorVentas.Entidades.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\Ventas\" />
-  </ItemGroup>
-
 
 </Project>
