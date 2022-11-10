@@ -53,12 +53,6 @@ namespace GestorVentas.Controllers
             });
 
         }
-
-
-
-
-
-
         private bool RolExists(int id)
         {
             return _contexto.Roles.Any(e=> e.IdRol==id);
