@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace GestorVentas.Entidades.Ventas
@@ -7,8 +8,10 @@ namespace GestorVentas.Entidades.Ventas
     public class Persona
     {
         public int idPersona { get; set; }
-        public int idRol { get; set; }
-
+        [Required]
+        public string tipo_persona { get; set; }
+        [Required]
+        [StringLength(100,MinimumLength =3,ErrorMessage ="El campo debe contener al menos 3 caracteres y como maximo 100 caracteres")]
         public string nombre { get; set; }
 
         public string tipo_documento { get; set; }
