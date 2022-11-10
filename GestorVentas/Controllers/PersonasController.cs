@@ -42,9 +42,25 @@ namespace GestorVentas.Controllers
                 telefono=p.telefono,
                 email=p.email,
             });
+        }
+        //Get:api/Usuarios/ListarProveedores
+        [HttpGet("[action]")]
+        public async Task<IEnumerable<PersonaVM>> ListarProveedores()
+        {
+            var personas = await _contexto.Personas.Where(p => p.tipo_persona == "Proveedor").ToListAsync();
+            return personas.Select(p => new PersonaVM
+            {
+                idPersona = p.idPersona,
+                tipo_persona = p.tipo_persona,
+                nombre = p.nombre,
+                tipo_documento = p.tipo_documento,
+                num_documento = p.num_documento,
+                direccion = p.direccion,
+                telefono = p.telefono,
+                email = p.email,
+            });
 
         }
-
 
         private bool PersonaExists(int id)
         {
