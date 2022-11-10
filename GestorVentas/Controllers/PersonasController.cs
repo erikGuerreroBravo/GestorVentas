@@ -62,6 +62,55 @@ namespace GestorVentas.Controllers
 
         }
 
+
+        //POST: api/Usuarios/Crear
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Crear([FromBody] CrearVM model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var email = model.email.ToLower();
+
+            if (await _contexto.Personas.AnyAsync(p => p.email == email))
+            {
+                return BadRequest("El email ya existe");
+            }
+
+            CrearPasswordHash(model.Password, out byte[] passwordHash, out byte[] passwordSalt);
+
+            Usuario usuario = new Usuario
+            {
+                IdRol = model.IdRol,
+                Nombre = model.Nombre,
+                Tipo_Documento = model.Tipo_Documento,
+                Num_Documento = model.Num_Documento,
+                Direccion = model.Direccion,
+                Telefono = model.Telefono,
+                Email = model.Email.ToLower(),
+                Condicion = true,
+                Password_Hash = passwordHash,
+                Password_Salt = passwordSalt
+            };
+            _contexto.Usuarios.Add(usuario);
+            try
+            {
+                await _contexto.SaveChangesAsync();
+            }
+            catch (System.Exception ex)
+            {
+                string mensaje = ex.Message;
+                return BadRequest(mensaje);
+            }
+
+            return Ok();
+        }
+
+
+
+
+
         private bool PersonaExists(int id)
         {
             return _contexto.Personas.Any(e => e.idPersona == id);
