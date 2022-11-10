@@ -2,6 +2,7 @@
 using GestorVentas.Entidades.Ventas;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace GestorVentas.Controllers
 {
@@ -22,6 +23,10 @@ namespace GestorVentas.Controllers
             return _contexto.Personas;
         }
 
+        private bool PersonaExists(int id)
+        {
+            return _contexto.Personas.Any(e => e.idPersona == id);
+        }
 
 
     }
