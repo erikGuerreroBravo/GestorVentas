@@ -1,5 +1,6 @@
 ﻿using GestorVentas.Datos.Mapping.Almacen;
 using GestorVentas.Datos.Mapping.Usuarios;
+using GestorVentas.Datos.Mapping.Ventas;
 using GestorVentas.Entidades.Almacen;
 using GestorVentas.Entidades.Usuarios;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +25,7 @@ namespace GestorVentas.Datos
             modelBuilder.ApplyConfiguration(new ArticuloMap());
             modelBuilder.ApplyConfiguration(new RolMap());
             modelBuilder.ApplyConfiguration(new UsuarioMap());
+            modelBuilder.ApplyConfiguration(new PersonaMap());
         }
 
     }
