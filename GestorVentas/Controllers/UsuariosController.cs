@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace GestorVentas.Controllers
@@ -213,7 +214,7 @@ namespace GestorVentas.Controllers
 
         }
         [HttpPost("[action]")]
-        public async Task<IActionResult> Login(LoginVM loginVM) 
+        public async Task<IActionResult> Login(LoginVM loginVM)
         {
             var email = loginVM.email.ToLower();
             var usuario = await _contexto.Usuarios.Include(u => u.Rol).FirstOrDefaultAsync(u => u.Email == email);
@@ -226,6 +227,14 @@ namespace GestorVentas.Controllers
             {
                 return NotFound();
             }
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier,usuario.IdUsuario.ToString()),
+                new Claim(ClaimTypes.Email,email),
+                new Claim(ClaimTypes.Role,usuario.Rol.Nombre)
+            };
+
+
         }
         private bool VerficarPasswordHash(string passsword, byte[] passwordHashAlmacenado, byte[] passwordSalt)
         {
