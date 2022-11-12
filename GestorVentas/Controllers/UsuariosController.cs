@@ -216,6 +216,7 @@ namespace GestorVentas.Controllers
         public async Task<IActionResult> Login(LoginVM loginVM) 
         {
             var email = loginVM.email.ToLower();
+            var usuario = await _contexto.Usuarios.Include(u => u.Rol).FirstOrDefaultAsync(u => u.Email == email);
         }
 
 
