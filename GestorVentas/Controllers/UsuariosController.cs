@@ -217,6 +217,10 @@ namespace GestorVentas.Controllers
         {
             var email = loginVM.email.ToLower();
             var usuario = await _contexto.Usuarios.Include(u => u.Rol).FirstOrDefaultAsync(u => u.Email == email);
+            if (usuario == null)
+            {
+                return NotFound();
+            }
         }
 
 
