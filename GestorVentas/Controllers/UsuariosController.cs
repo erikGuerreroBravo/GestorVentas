@@ -224,7 +224,7 @@ namespace GestorVentas.Controllers
             //validamos las conicidencias del password
             if (!VerficarPasswordHash(loginVM.password, usuario.Password_Hash, usuario.Password_Salt))
             {
-                
+                return NotFound();
             }
         }
         private bool VerficarPasswordHash(string passsword, byte[] passwordHashAlmacenado, byte[] passwordSalt)
