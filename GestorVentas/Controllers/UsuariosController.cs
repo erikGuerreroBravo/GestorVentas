@@ -5,6 +5,7 @@ using GestorVentas.Models.Ventas.Persona;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace GestorVentas.Controllers
     public class UsuariosController : ControllerBase
     {
         private readonly Contexto _contexto;
+        private readonly IConfiguration _config;
 
         public UsuariosController(Contexto contexto)
         {
