@@ -212,6 +212,10 @@ namespace GestorVentas.Controllers
 
         }
 
+        public IActionResult Login()
+        { }
+
+
         private bool UsarioExists(int id)
         {
             return _contexto.Usuarios.Any(u=> u.IdUsuario == id);
