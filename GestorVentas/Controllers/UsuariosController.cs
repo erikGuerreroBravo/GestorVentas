@@ -1,6 +1,7 @@
 ﻿using GestorVentas.Datos;
 using GestorVentas.Entidades.Usuarios;
 using GestorVentas.Models.Usuarios.Usuario;
+using GestorVentas.Models.Ventas.Persona;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -212,8 +213,10 @@ namespace GestorVentas.Controllers
 
         }
         [HttpPost("[action]")]
-        public async Task<IActionResult> Login()
-        { }
+        public async Task<IActionResult> Login(LoginVM loginVM) 
+        {
+            var email = loginVM.email.ToLower();
+        }
 
 
         private bool UsarioExists(int id)
