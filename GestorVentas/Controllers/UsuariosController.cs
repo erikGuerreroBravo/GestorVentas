@@ -212,7 +212,7 @@ namespace GestorVentas.Controllers
 
         }
         [HttpPost("[action]")]
-        public IActionResult Login()
+        public async Task<IActionResult> Login()
         { }
 
 
