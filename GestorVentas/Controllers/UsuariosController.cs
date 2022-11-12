@@ -222,6 +222,9 @@ namespace GestorVentas.Controllers
                 return NotFound();
             }
         }
+        private bool VerficarPasswordHash(string passsword, byte[] passwordHashAlmacenado, byte[] passwordSalt)
+
+
 
 
         private bool UsarioExists(int id)
