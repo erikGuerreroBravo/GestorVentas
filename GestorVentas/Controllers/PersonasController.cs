@@ -30,7 +30,7 @@ namespace GestorVentas.Controllers
         [HttpGet("[action]")]
         public async Task<IEnumerable<PersonaVM>> ListarClientes()
         {
-            var personas = await _contexto.Personas.Where(p=> p.tipo_persona=="Clientes").ToListAsync();
+            var personas = await _contexto.Personas.Where(p=> p.tipo_persona=="Cliente").ToListAsync();
             return personas.Select(p => new PersonaVM
             {
                 idPersona = p.idPersona,
@@ -86,7 +86,7 @@ namespace GestorVentas.Controllers
                 direccion = model.direccion,
                 telefono = model.telefono,
                 email = model.email.ToLower(),
-                condicion = true,
+                
                 
             };
             _contexto.Personas.Add(persona);
