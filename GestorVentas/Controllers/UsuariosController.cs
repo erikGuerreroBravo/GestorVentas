@@ -242,7 +242,9 @@ namespace GestorVentas.Controllers
                 new Claim("rol",usuario.Rol.Nombre),
                 new Claim("nombre",usuario.Nombre)
             };
-
+            return Ok(
+                new { token = GenerarToken(claims)}
+                );
 
         }
         private bool VerficarPasswordHash(string passsword, byte[] passwordHashAlmacenado, byte[] passwordSalt)
