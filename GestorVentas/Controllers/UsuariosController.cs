@@ -250,7 +250,10 @@ namespace GestorVentas.Controllers
                 return new ReadOnlySpan<byte>(passwordHashAlmacenado).SequenceEqual(new ReadOnlySpan<byte>(passwordHashNuevo));
             }
         }
-
+        private string GenerarToken(List<Claim> claims)
+        {
+            
+        }
 
 
         private bool UsarioExists(int id)
