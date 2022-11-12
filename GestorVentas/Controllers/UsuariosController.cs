@@ -21,9 +21,10 @@ namespace GestorVentas.Controllers
         private readonly Contexto _contexto;
         private readonly IConfiguration _config;
 
-        public UsuariosController(Contexto contexto)
+        public UsuariosController(Contexto contexto, IConfiguration config)
         {
             _contexto = contexto;
+            _config = config;
         }
 
         //Get:api/Usuarios/Listar
