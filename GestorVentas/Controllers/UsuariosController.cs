@@ -211,7 +211,7 @@ namespace GestorVentas.Controllers
             }
 
         }
-
+        [HttpPost("[action]")]
         public IActionResult Login()
         { }
 
