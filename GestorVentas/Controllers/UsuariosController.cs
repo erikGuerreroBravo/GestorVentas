@@ -231,7 +231,10 @@ namespace GestorVentas.Controllers
             {
                 new Claim(ClaimTypes.NameIdentifier,usuario.IdUsuario.ToString()),
                 new Claim(ClaimTypes.Email,email),
-                new Claim(ClaimTypes.Role,usuario.Rol.Nombre)
+                new Claim(ClaimTypes.Role,usuario.Rol.Nombre),
+                new Claim("idusuario",usuario.IdUsuario.ToString()),
+                new Claim("rol",usuario.Rol.Nombre),
+                new Claim("nombre",usuario.Nombre)
             };
 
 
