@@ -223,7 +223,12 @@ namespace GestorVentas.Controllers
             }
         }
         private bool VerficarPasswordHash(string passsword, byte[] passwordHashAlmacenado, byte[] passwordSalt)
-
+        {
+            using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt)) 
+            {
+                var passwordHashNuevo = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(passsword));
+            }
+        }
 
 
 
