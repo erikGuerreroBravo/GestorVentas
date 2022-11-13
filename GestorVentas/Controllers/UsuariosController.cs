@@ -247,6 +247,13 @@ namespace GestorVentas.Controllers
                 );
 
         }
+        /// <summary>
+        /// Validacion del password y comparador de contraseñas
+        /// </summary>
+        /// <param name="passsword">el password del usuario</param>
+        /// <param name="passwordHashAlmacenado">el password del usuario hasheado</param>
+        /// <param name="passwordSalt">el password del usuario hasheado con salt</param>
+        /// <returns>regresa un valor true/false </returns>
         private bool VerficarPasswordHash(string passsword, byte[] passwordHashAlmacenado, byte[] passwordSalt)
         {
             using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt)) 
