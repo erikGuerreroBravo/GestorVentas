@@ -259,6 +259,7 @@ namespace GestorVentas.Controllers
             using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt)) 
             {
                 var passwordHashNuevo = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(passsword));
+                //comparaacion entre el hash almacenado y el hashsalt
                 return new ReadOnlySpan<byte>(passwordHashAlmacenado).SequenceEqual(new ReadOnlySpan<byte>(passwordHashNuevo));
             }
         }
