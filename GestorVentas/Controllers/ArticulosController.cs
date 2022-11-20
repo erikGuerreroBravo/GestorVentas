@@ -1,6 +1,7 @@
 ﻿using GestorVentas.Datos;
 using GestorVentas.Entidades.Almacen;
 using GestorVentas.Models.Almacen.Articulo;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +26,7 @@ namespace GestorVentas.Controllers
         }
 
         //Get:api/Articulos/Listar
+        [Authorize(Roles="Almacenero,Administrador")]
         [HttpGet("[action]")]
         public async Task<IEnumerable<ArticuloVM>> Listar()
         {
