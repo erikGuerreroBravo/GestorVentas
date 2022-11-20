@@ -2,6 +2,7 @@
 using GestorVentas.Entidades.Almacen;
 using GestorVentas.Models.Almacen;
 using GestorVentas.Models.Almacen.Categoria;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace GestorVentas.Controllers
 {
+    [Authorize(Roles="Almacenero,Administrador")]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoriasController : ControllerBase
