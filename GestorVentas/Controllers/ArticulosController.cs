@@ -150,7 +150,7 @@ namespace GestorVentas.Controllers
 
         }
 
-
+        [Authorize(Roles = "Almacenero,Administrador")]
         //PUT: api/Articulos/Desactivar/1
         [HttpPut("[action]/{id}")]
         public async Task<IActionResult> Desactivar([FromRoute] int id)
