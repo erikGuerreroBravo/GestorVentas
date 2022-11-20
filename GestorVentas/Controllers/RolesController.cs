@@ -1,5 +1,6 @@
 ﻿using GestorVentas.Datos;
 using GestorVentas.Models.Usuarios.Rol;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace GestorVentas.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     [Route("api/[controller]")]
     [ApiController]
     public class RolesController : ControllerBase
