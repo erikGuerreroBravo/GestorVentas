@@ -110,6 +110,7 @@ namespace GestorVentas.Controllers
             return Ok();
         }
         //PUT: api/Articulos/Actualizar
+        [Authorize(Roles = "Almacenero,Administrador")]
         [HttpPut("[action]")]
         public async Task<IActionResult> Actualizar([FromBody] ArticuloActualizarVM model)
         {
