@@ -110,6 +110,7 @@ namespace GestorVentas.Controllers
 
 
         // PUT: api/Personas/Actualizar
+        [Authorize(Roles = "Almacenero,Administrador,Vendedor")]
         [HttpPut("[action]")]
         public async Task<IActionResult> Actualizar([FromBody] PersonasActualizarVM model)
         {
