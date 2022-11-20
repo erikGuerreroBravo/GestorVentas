@@ -1,6 +1,7 @@
 ﻿using GestorVentas.Datos;
 using GestorVentas.Entidades.Ventas;
 using GestorVentas.Models.Ventas.Persona;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -27,6 +28,7 @@ namespace GestorVentas.Controllers
         }
 
         //Get:api/Usuarios/ListarClientes
+        [Authorize(Roles = "Vendedor,Administrador")]
         [HttpGet("[action]")]
         public async Task<IEnumerable<PersonaVM>> ListarClientes()
         {
@@ -43,7 +45,9 @@ namespace GestorVentas.Controllers
                 email=p.email,
             });
         }
+
         //Get:api/Usuarios/ListarProveedores
+        [Authorize(Roles = "Almaceneros,Administrador")]
         [HttpGet("[action]")]
         public async Task<IEnumerable<PersonaVM>> ListarProveedores()
         {
@@ -143,9 +147,6 @@ namespace GestorVentas.Controllers
 
             return Ok();
         }
-
-
-
 
         private bool PersonaExists(int id)
         {
