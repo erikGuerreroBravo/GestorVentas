@@ -47,7 +47,7 @@ namespace GestorVentas.Controllers
         }
 
         //Get:api/Usuarios/ListarProveedores
-        [Authorize(Roles = "Almaceneros,Administrador")]
+        [Authorize(Roles = "Almacenero,Administrador")]
         [HttpGet("[action]")]
         public async Task<IEnumerable<PersonaVM>> ListarProveedores()
         {
