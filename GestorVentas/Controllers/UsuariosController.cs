@@ -184,6 +184,7 @@ namespace GestorVentas.Controllers
         }
 
         // PUT: api/Usuarios/Activar/1
+        [Authorize(Roles = "Administrador")]
         [HttpPut("[action]/{id}")]
         public async Task<IActionResult> Activar([FromRoute] int id)
         {
