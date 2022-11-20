@@ -48,7 +48,9 @@ namespace GestorVentas.Controllers
 
             }); 
         }
+
         //Get:api/Articulos/Mostrar/7
+        [Authorize(Roles = "Almacenero,Administrador")]
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> Mostrar([FromRoute] int id)
         {
