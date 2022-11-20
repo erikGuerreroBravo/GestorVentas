@@ -2,6 +2,7 @@
 using GestorVentas.Entidades.Usuarios;
 using GestorVentas.Models.Usuarios.Usuario;
 using GestorVentas.Models.Ventas.Persona;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -31,6 +32,7 @@ namespace GestorVentas.Controllers
         }
 
         //Get:api/Usuarios/Listar
+        [Authorize(Roles = "Administrador")]
         [HttpGet("[action]")]
         public async Task<IEnumerable<UsuarioVM>> Listar()
         {
@@ -53,6 +55,7 @@ namespace GestorVentas.Controllers
         }
 
         //POST: api/Usuarios/Crear
+        [Authorize(Roles = "Administrador")]
         [HttpPost("[action]")]
         public async Task<IActionResult> Crear([FromBody] UsuarioCrearVM model)
         {
