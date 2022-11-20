@@ -68,6 +68,7 @@ namespace GestorVentas.Controllers
 
 
         //POST: api/Personas/Crear
+        [Authorize(Roles = "Almacenero,Administrador,Vendedor")]
         [HttpPost("[action]")]
         public async Task<IActionResult> Crear([FromBody] CrearVM model)
         {
