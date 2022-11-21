@@ -40,7 +40,7 @@ namespace GestorVentas.Controllers
             return usuarios.Select(u => new UsuarioVM
             {
                  IdUsuario = u.IdUsuario,
-                 //IdRol = u.IdRol,
+                 IdRol = u.IdRol,
                  Rol= u.Rol.Nombre,
                  Nombre =u.Nombre,
                  Tipo_Documento =u.Tipo_Documento,
@@ -124,7 +124,7 @@ namespace GestorVentas.Controllers
                 return NotFound();
             }
 
-            //usuario.IdRol = model.IdRol;
+            usuario.IdRol = model.IdRol;
             usuario.Nombre = model.Nombre;
             usuario.Tipo_Documento = model.Tipo_Documento;
             usuario.Num_Documento = model.Num_Documento;
