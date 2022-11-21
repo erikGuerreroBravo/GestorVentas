@@ -7,7 +7,7 @@ namespace GestorVentas.Entidades.Usuarios
     {
         public int IdUsuario { get; set; }
         [Required]
-        
+        [NotMapped]
         public int IdRol { get; set; }
 
         [Required]
@@ -25,7 +25,7 @@ namespace GestorVentas.Entidades.Usuarios
         [Required]
         public byte[] Password_Salt { get; set; }
         public bool Condicion { get; set; }
-
+        [ForeignKey("idrol")]
         public Rol Rol { get; set; }
 
     }
