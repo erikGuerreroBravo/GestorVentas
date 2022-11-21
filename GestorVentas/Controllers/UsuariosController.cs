@@ -32,7 +32,7 @@ namespace GestorVentas.Controllers
         }
 
         //Get:api/Usuarios/Listar
-        [Authorize(Roles = "Administrador")]
+        //[Authorize(Roles = "Administrador")]
         [HttpGet("[action]")]
         public async Task<IEnumerable<UsuarioVM>> Listar()
         {
@@ -40,7 +40,7 @@ namespace GestorVentas.Controllers
             return usuarios.Select(u => new UsuarioVM
             {
                  IdUsuario = u.IdUsuario,
-                 IdRol = u.IdRol,
+                 //IdRol = u.IdRol,
                  Rol= u.Rol.Nombre,
                  Nombre =u.Nombre,
                  Tipo_Documento =u.Tipo_Documento,
@@ -55,7 +55,8 @@ namespace GestorVentas.Controllers
         }
 
         //POST: api/Usuarios/Crear
-        [Authorize(Roles = "Administrador")]
+        //[Authorize(Roles = "Administrador")]
+        [AllowAnonymous]
         [HttpPost("[action]")]
         public async Task<IActionResult> Crear([FromBody] UsuarioCrearVM model)
         {
@@ -83,9 +84,11 @@ namespace GestorVentas.Controllers
                 Email = model.Email.ToLower(),
                 Condicion= true,
                 Password_Hash = passwordHash,
-                Password_Salt = passwordSalt
+                Password_Salt = passwordSalt,
+                
             };
-            _contexto.Usuarios.Add(usuario);
+            
+             _contexto.Usuarios.Add(usuario);
             try
             {
                 await _contexto.SaveChangesAsync();
@@ -121,7 +124,7 @@ namespace GestorVentas.Controllers
                 return NotFound();
             }
 
-            usuario.IdRol = model.IdRol;
+            //usuario.IdRol = model.IdRol;
             usuario.Nombre = model.Nombre;
             usuario.Tipo_Documento = model.Tipo_Documento;
             usuario.Num_Documento = model.Num_Documento;
