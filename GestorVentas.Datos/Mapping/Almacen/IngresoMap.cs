@@ -12,7 +12,9 @@ namespace GestorVentas.Datos.Mapping.Almacen
         public void Configure(EntityTypeBuilder<Ingreso> builder)
         {
             builder.ToTable("ingreso").HasKey(i => i.idingreso);
-            builder.HasOne(i => i.persona);
+            builder.HasOne(i => i.persona)
+                .WithMany(p => p.ingresos)
+                .HasForeignKey(p => p.idproveedor);
         }
     }
 }
