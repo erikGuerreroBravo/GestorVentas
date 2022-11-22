@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using GestorVentas.Entidades.Almacen;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GestorVentas.Entidades.Usuarios
@@ -25,8 +27,8 @@ namespace GestorVentas.Entidades.Usuarios
         [Required]
         public byte[] Password_Salt { get; set; }
         public bool Condicion { get; set; }
-        [ForeignKey("idrol")]
         public Rol Rol { get; set; }
+        public ICollection<Ingreso> ingresos { get; set; }
 
     }
 }
