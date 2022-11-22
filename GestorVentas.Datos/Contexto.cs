@@ -16,6 +16,10 @@ namespace GestorVentas.Datos
         public DbSet<Usuario> Usuarios { get; set; }
 
         public DbSet<Persona> Personas { get; set; }
+
+        public DbSet<Ingreso> Ingresos { get; set; }
+
+        public DbSet<DetalleIngreso> DetalleIngresos { get; set; }
         public Contexto(DbContextOptions<Contexto> options):base(options)
         {
 
