@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GestorVentas.Entidades.Usuarios;
+using GestorVentas.Entidades.Ventas;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -25,5 +27,10 @@ namespace GestorVentas.Entidades.Almacen
         public decimal total { get; set; }
         [Required]
         public string estado { get; set; }
+
+        public ICollection<DetalleIngreso> detalles { get; set; }
+        public Usuario usuario { get; set; }
+
+        public Persona persona { get; set; }
     }
 }
