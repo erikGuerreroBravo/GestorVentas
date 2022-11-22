@@ -28,6 +28,8 @@ namespace GestorVentas.Datos
             modelBuilder.ApplyConfiguration(new RolMap());
             modelBuilder.ApplyConfiguration(new UsuarioMap());
             modelBuilder.ApplyConfiguration(new PersonaMap());
+            modelBuilder.ApplyConfiguration(new IngresoMap());
+            modelBuilder.ApplyConfiguration(new DetalleIngresoMap());
         }
 
     }
