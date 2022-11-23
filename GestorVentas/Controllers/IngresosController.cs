@@ -3,6 +3,7 @@ using GestorVentas.Models.Almacen.Ingreso;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,7 +20,7 @@ namespace GestorVentas.Controllers
         }
         [Authorize(Roles = "Almacenero,Administrador")]
         [HttpGet("[action]")]
-        public async Task<IOrderedEnumerable<IngresoVM>> Listar()
+        public async Task<IEnumerable<IngresoVM>> Listar()
         {
             var ingreso = await contexto.Ingresos
                 .Include(i => i.usuario)
@@ -33,6 +34,13 @@ namespace GestorVentas.Controllers
                 idproveedor = i.idproveedor,    
                 proveedor= i.persona.nombre,
                 idusuario= i.idusuario,
+                usuario = i.usuario.Nombre,
+                tipo_comprobante = i.tipo_comprobante,
+                num_comprobante= i.num_comprobante,
+                fecha_hora = i.fecha_hora,
+                impuesto = i.impuesto,
+                total = i.total,
+                estado= i.estado
 
             });
 
