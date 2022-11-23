@@ -21,7 +21,12 @@ namespace GestorVentas.Controllers
         [HttpGet("[action]")]
         public async Task<IOrderedEnumerable<IngresoVM>> Listar()
         {
-            var ingreso = await contexto.Ingresos.Include(i => i.usuario).Include(i => i.persona).ToListAsync();
+            var ingreso = await contexto.Ingresos
+                .Include(i => i.usuario)
+                .Include(i => i.persona)
+                .OrderByDescending(i=> i.idingreso)
+                .Take(100)
+                .ToListAsync();
 
         }
         private bool IngresoExists(int id)
