@@ -18,7 +18,8 @@ namespace GestorVentas.Controllers
         {
             contexto = _contexto;
         }
-        [Authorize(Roles = "Almacenero,Administrador")]
+        
+        //[Authorize(Roles = "Almacenero,Administrador")]
         [HttpGet("[action]")]
         public async Task<IEnumerable<IngresoVM>> Listar()
         {
