@@ -6,7 +6,7 @@ namespace GestorVentas.Models.Almacen.Ingreso
     {
         public int idingreso { get; set; }
         public int idproveedor { get; set; }
-        public int proveedor { get; set; }
+        public string proveedor { get; set; }
         public int idusuario { get; set; }
         public string usuario { get; set; }
         public string  tipo_comprobante { get; set; }

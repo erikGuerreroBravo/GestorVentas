@@ -27,6 +27,16 @@ namespace GestorVentas.Controllers
                 .OrderByDescending(i=> i.idingreso)
                 .Take(100)
                 .ToListAsync();
+            return ingreso.Select(i => new IngresoVM
+            {
+                idingreso = i.idingreso,
+                idproveedor = i.idproveedor,    
+                proveedor= i.persona.nombre,
+                idusuario= i.idusuario,
+
+            });
+
+
 
         }
         private bool IngresoExists(int id)
