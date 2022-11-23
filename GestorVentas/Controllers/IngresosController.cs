@@ -38,6 +38,7 @@ namespace GestorVentas.Controllers
                 usuario = i.usuario.Nombre,
                 tipo_comprobante = i.tipo_comprobante,
                 num_comprobante= i.num_comprobante,
+                serie_comprobante=i.serie_comnprobante,
                 fecha_hora = i.fecha_hora,
                 impuesto = i.impuesto,
                 total = i.total,
