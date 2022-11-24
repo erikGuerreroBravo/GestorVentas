@@ -1,8 +1,10 @@
 ﻿using GestorVentas.Datos;
+using GestorVentas.Entidades.Almacen;
 using GestorVentas.Models.Almacen.Ingreso;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -59,7 +61,20 @@ namespace GestorVentas.Controllers
             {
                 return BadRequest(ModelState);
             }
+            var fechaHora = DateTime.Now;
+            Ingreso ingreso = new Ingreso
+            {
+                idproveedor = model.idproveedor,
+                idusuario= model.idusuario,
+                tipo_comprobante = model.tipo_comprobante,
+                serie_comnprobante = model.serie_comprobante,
+                num_comprobante = model.num_comprobante,
+                fecha_hora = fechaHora,
+                impuesto= model.impuesto,
+                total = model.total,
+                estado = "Aceptado"
 
+            };
 
 
 
