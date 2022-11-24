@@ -75,8 +75,16 @@ namespace GestorVentas.Controllers
                 estado = "Aceptado"
 
             };
-
-
+            try
+            {
+                contexto.Ingresos.Add(ingreso);
+                await contexto.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return BadRequest();                
+            }
+            return Ok();
 
         }
 
