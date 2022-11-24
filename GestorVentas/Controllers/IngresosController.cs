@@ -79,6 +79,19 @@ namespace GestorVentas.Controllers
             {
                 contexto.Ingresos.Add(ingreso);
                 await contexto.SaveChangesAsync();
+                var id = ingreso.idingreso;
+                foreach (var det in model.DetallesVM)
+                {
+                    DetalleIngreso detalle = new DetalleIngreso
+                    {
+                        idingreso= id,
+                        idarticulo = det.idarticulo,
+                        cantidad=det.cantidad,
+                        precio = det.precio
+                    };
+                    contexto.DetalleIngresos.Add(detalle);
+                }
+                await contexto.SaveChangesAsync();
             }
             catch (Exception)
             {
