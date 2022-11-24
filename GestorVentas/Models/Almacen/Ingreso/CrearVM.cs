@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace GestorVentas.Models.Almacen.Ingreso
 {
@@ -17,5 +18,8 @@ namespace GestorVentas.Models.Almacen.Ingreso
         public decimal impuesto { get; set; }
         [Required]
         public decimal total { get; set; }
+
+        public List<DetalleVM> DetallesVM { get; set; }
+
     }
 }
