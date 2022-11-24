@@ -49,6 +49,24 @@ namespace GestorVentas.Controllers
 
 
         }
+
+        //POST: api/Ingresos/Crear
+        [Authorize(Roles ="Almacenero,Administrador")]
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Crear([FromBody] CrearVM model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+
+
+
+        }
+
+
+
         private bool IngresoExists(int id)
         {
             return contexto.Ingresos.Any(e=> e.idingreso==id);
