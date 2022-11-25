@@ -80,6 +80,7 @@ namespace GestorVentas.Controllers
                 contexto.Ingresos.Add(ingreso);
                 await contexto.SaveChangesAsync();
                 var id = ingreso.idingreso;
+                //iteracion en tabla detalle
                 foreach (var det in model.DetallesVM)
                 {
                     DetalleIngreso detalle = new DetalleIngreso
