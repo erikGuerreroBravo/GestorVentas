@@ -52,9 +52,6 @@ namespace GestorVentas.Controllers
 
         }
 
-
-
-
         //Get:api/Categorias/Mostrar/7
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> Mostrar([FromRoute] int id)
