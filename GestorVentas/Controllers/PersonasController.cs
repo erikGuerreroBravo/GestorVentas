@@ -69,13 +69,13 @@ namespace GestorVentas.Controllers
 
         //Get:api/Personas/SelectProveedores
         [HttpGet("[action]")]
-        public async Task<IEnumerable<SelectCategoriaVM>> SelectProveedores()
+        public async Task<IEnumerable<SelectVM>> SelectProveedores()
         {
-            var categoria = await _contexto.Categorias.Where(c => c.Condicion == true).ToListAsync();
-            return categoria.Select(p => new SelectCategoriaVM
+            var persona = await _contexto.Personas.Where(p=> p.tipo_persona=="Proveedor").ToListAsync();
+            return persona.Select(p => new SelectVM
             {
-                IdCategoria = p.IdCategoria,
-                Nombre = p.Nombre,
+                idpersona = p.idPersona,
+                nombre = p.nombre,
 
             });
 
