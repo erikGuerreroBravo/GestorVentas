@@ -68,6 +68,7 @@ namespace GestorVentas.Controllers
 
 
         //Get:api/Personas/SelectProveedores
+        [Authorize(Roles = "Almacenero,Administrador")]
         [HttpGet("[action]")]
         public async Task<IEnumerable<SelectVM>> SelectProveedores()
         {
