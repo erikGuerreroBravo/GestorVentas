@@ -27,7 +27,7 @@ namespace GestorVentas.Controllers
             return _contexto.Personas;
         }
 
-        //Get:api/Usuarios/ListarClientes
+        //Get:api/Personas/ListarClientes
         [Authorize(Roles = "Vendedor,Administrador")]
         [HttpGet("[action]")]
         public async Task<IEnumerable<PersonaVM>> ListarClientes()
@@ -46,7 +46,7 @@ namespace GestorVentas.Controllers
             });
         }
 
-        //Get:api/Usuarios/ListarProveedores
+        //Get:api/Personas/ListarProveedores
         [Authorize(Roles = "Almacenero,Administrador")]
         [HttpGet("[action]")]
         public async Task<IEnumerable<PersonaVM>> ListarProveedores()
@@ -67,7 +67,7 @@ namespace GestorVentas.Controllers
         }
 
 
-        //Get:api/Categorias/Listar
+        //Get:api/Personas/SelectProveedores
         [HttpGet("[action]")]
         public async Task<IEnumerable<SelectCategoriaVM>> SelectProveedores()
         {
