@@ -67,6 +67,23 @@ namespace GestorVentas.Controllers
         }
 
 
+        //Get:api/Categorias/Listar
+        [HttpGet("[action]")]
+        public async Task<IEnumerable<SelectCategoriaVM>> SelectProveedores()
+        {
+            var categoria = await _contexto.Categorias.Where(c => c.Condicion == true).ToListAsync();
+            return categoria.Select(p => new SelectCategoriaVM
+            {
+                IdCategoria = p.IdCategoria,
+                Nombre = p.Nombre,
+
+            });
+
+        }
+
+
+
+
         //POST: api/Personas/Crear
         [Authorize(Roles = "Almacenero,Administrador,Vendedor")]
         [HttpPost("[action]")]
