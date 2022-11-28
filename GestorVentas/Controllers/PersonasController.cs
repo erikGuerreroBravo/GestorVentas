@@ -72,6 +72,7 @@ namespace GestorVentas.Controllers
         [HttpGet("[action]")]
         public async Task<IEnumerable<SelectVM>> SelectProveedores()
         {
+            // se consulta a la tabla personas pero con rol proveedor
             var persona = await _contexto.Personas.Where(p=> p.tipo_persona=="Proveedor").ToListAsync();
             return persona.Select(p => new SelectVM
             {
