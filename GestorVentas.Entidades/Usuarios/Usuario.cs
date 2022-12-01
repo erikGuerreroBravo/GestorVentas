@@ -29,7 +29,7 @@ namespace GestorVentas.Entidades.Usuarios
         [Required]
         [ForeignKey("IdRol")]
         public int IdRol { get; set; }
-        //[NotMapped]
+        [NotMapped]
         public Rol Rol { get; set; }
         public ICollection<Ingreso> ingresos { get; set; }
 

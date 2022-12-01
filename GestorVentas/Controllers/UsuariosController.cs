@@ -233,12 +233,8 @@ namespace GestorVentas.Controllers
         public async Task<IActionResult> Login(LoginVM loginVM)
         {
             var email = loginVM.email.ToLower();
-            var usuario = (from u in _contexto.Usuarios
-                          where u.Condicion == true && u.Email == loginVM.email
-                          select new Usuario()).FirstOrDefault();
-
-            //var usuario = await _contexto.Usuarios.Where(u=> u.Condicion==true).FirstOrDefaultAsync(u => u.Email == email);
-            ///var rol = await _contexto.Roles.Where(p => p.IdRol == usuario. .Rol.IdRol).FirstOrDefaultAsync();
+            var usuario = await _contexto.Usuarios.Where(u=> u.Condicion==true).FirstOrDefaultAsync(u => u.Email == email);
+            
             if (usuario == null)
             {
                 return NotFound();
