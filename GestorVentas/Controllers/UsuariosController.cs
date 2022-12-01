@@ -39,7 +39,7 @@ namespace GestorVentas.Controllers
             var usuarios = await _contexto.Usuarios.Include(u=>u.Rol).ToListAsync();
             return usuarios.Select(u => new UsuarioVM
             {
-                 IdUsuario = u.IdUsuario,
+                 IdUsuario = u.idUsuario,
                  //IdRol = u.IdRol,
                  Rol= u.Rol.Nombre,
                  Nombre =u.Nombre,
@@ -117,7 +117,7 @@ namespace GestorVentas.Controllers
                 return BadRequest();
             }
 
-            var usuario = await _contexto.Usuarios.FirstOrDefaultAsync(u => u.IdUsuario == model.IdUsuario);
+            var usuario = await _contexto.Usuarios.FirstOrDefaultAsync(u => u.idUsuario == model.IdUsuario);
 
             if (usuario == null)
             {
