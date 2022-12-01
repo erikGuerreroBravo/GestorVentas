@@ -229,6 +229,7 @@ namespace GestorVentas.Controllers
 
         }
         [HttpPost("[action]")]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(LoginVM loginVM)
         {
             var email = loginVM.email.ToLower();

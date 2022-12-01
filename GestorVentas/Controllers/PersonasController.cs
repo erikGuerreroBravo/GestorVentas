@@ -29,7 +29,7 @@ namespace GestorVentas.Controllers
 
         //Get:api/Personas/ListarClientes
         [Authorize(Roles = "Vendedor,Administrador")]
-        [HttpGet("[action]")]
+        [HttpGet("[action]")] 
         public async Task<IEnumerable<PersonaVM>> ListarClientes()
         {
             var personas = await _contexto.Personas.Where(p=> p.tipo_persona=="Cliente").ToListAsync();
