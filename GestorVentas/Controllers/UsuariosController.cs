@@ -164,7 +164,7 @@ namespace GestorVentas.Controllers
                 return BadRequest();
             }
 
-            var usuario = await _contexto.Usuarios.FirstOrDefaultAsync(u => u.IdUsuario == id);
+            var usuario = await _contexto.Usuarios.FirstOrDefaultAsync(u => u.idUsuario == id);
 
             if (usuario == null)
             {
@@ -197,7 +197,7 @@ namespace GestorVentas.Controllers
                 return BadRequest();
             }
 
-            var usuario = await _contexto.Usuarios.FirstOrDefaultAsync(u => u.IdUsuario == id);
+            var usuario = await _contexto.Usuarios.FirstOrDefaultAsync(u => u.idUsuario == id);
 
             if (usuario == null)
             {
@@ -246,10 +246,10 @@ namespace GestorVentas.Controllers
             }
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.NameIdentifier,usuario.IdUsuario.ToString()),
+                new Claim(ClaimTypes.NameIdentifier,usuario.idUsuario.ToString()),
                 new Claim(ClaimTypes.Email,email),
                 new Claim(ClaimTypes.Role,usuario.Rol.Nombre),
-                new Claim("idusuario",usuario.IdUsuario.ToString()),
+                new Claim("idusuario",usuario.idUsuario.ToString()),
                 new Claim("rol",usuario.Rol.Nombre),
                 new Claim("nombre",usuario.Nombre)
             };
@@ -294,7 +294,7 @@ namespace GestorVentas.Controllers
 
         private bool UsarioExists(int id)
         {
-            return _contexto.Usuarios.Any(u=> u.IdUsuario == id);
+            return _contexto.Usuarios.Any(u=> u.idUsuario == id);
         }
     }
 }
