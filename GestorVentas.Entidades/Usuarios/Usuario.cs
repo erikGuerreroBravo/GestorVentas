@@ -26,7 +26,7 @@ namespace GestorVentas.Entidades.Usuarios
         [Required]
         public byte[] Password_Salt { get; set; }
         public bool Condicion { get; set; }
-        
+       
         public Rol Rol { get; set; }
         public ICollection<Ingreso> ingresos { get; set; }
 

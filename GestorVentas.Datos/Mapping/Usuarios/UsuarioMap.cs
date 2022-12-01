@@ -14,6 +14,9 @@ namespace GestorVentas.Datos.Mapping.Usuarios
         {
             builder.ToTable("usuario")
                 .HasKey(a => a.idUsuario);
+            builder.HasOne(r => r.Rol).WithMany(r=>r.Usuarios).HasForeignKey(p => p.idrol);
+                
+              
         }
     }
 }
