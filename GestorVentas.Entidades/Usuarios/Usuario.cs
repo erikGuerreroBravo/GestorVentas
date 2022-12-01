@@ -8,9 +8,7 @@ namespace GestorVentas.Entidades.Usuarios
     public class Usuario
     {
         public int IdUsuario { get; set; }
-        [Required]
-        [NotMapped]
-        public int IdRol { get; set; }
+       
 
         [Required]
         [StringLength(100, MinimumLength = 3, 
@@ -27,6 +25,11 @@ namespace GestorVentas.Entidades.Usuarios
         [Required]
         public byte[] Password_Salt { get; set; }
         public bool Condicion { get; set; }
+        
+        [Required]
+        [ForeignKey("IdRol")]
+        public int IdRol { get; set; }
+        //[NotMapped]
         public Rol Rol { get; set; }
         public ICollection<Ingreso> ingresos { get; set; }
 

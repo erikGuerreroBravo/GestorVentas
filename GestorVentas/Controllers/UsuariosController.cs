@@ -40,7 +40,7 @@ namespace GestorVentas.Controllers
             return usuarios.Select(u => new UsuarioVM
             {
                  IdUsuario = u.IdUsuario,
-                 IdRol = u.IdRol,
+                 //IdRol = u.IdRol,
                  Rol= u.Rol.Nombre,
                  Nombre =u.Nombre,
                  Tipo_Documento =u.Tipo_Documento,
@@ -75,7 +75,7 @@ namespace GestorVentas.Controllers
 
             Usuario usuario = new Usuario
             {
-                IdRol = model.IdRol,
+                ///IdRol = model.IdRol,
                 Nombre = model.Nombre,
                 Tipo_Documento = model.Tipo_Documento,
                 Num_Documento = model.Num_Documento,
@@ -124,7 +124,7 @@ namespace GestorVentas.Controllers
                 return NotFound();
             }
 
-            usuario.IdRol = model.IdRol;
+           // usuario.IdRol = model.IdRol;
             usuario.Nombre = model.Nombre;
             usuario.Tipo_Documento = model.Tipo_Documento;
             usuario.Num_Documento = model.Num_Documento;
@@ -233,7 +233,12 @@ namespace GestorVentas.Controllers
         public async Task<IActionResult> Login(LoginVM loginVM)
         {
             var email = loginVM.email.ToLower();
-            var usuario = await _contexto.Usuarios.Where(u=> u.Condicion==true).Include(u => u.Rol).FirstOrDefaultAsync(u => u.Email == email);
+            var usuario = (from u in _contexto.Usuarios
+                          where u.Condicion == true && u.Email == loginVM.email
+                          select new Usuario()).FirstOrDefault();
+
+            //var usuario = await _contexto.Usuarios.Where(u=> u.Condicion==true).FirstOrDefaultAsync(u => u.Email == email);
+            ///var rol = await _contexto.Roles.Where(p => p.IdRol == usuario. .Rol.IdRol).FirstOrDefaultAsync();
             if (usuario == null)
             {
                 return NotFound();
