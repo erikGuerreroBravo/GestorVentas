@@ -102,10 +102,7 @@ namespace GestorVentas.Controllers
                 Descripcion = articulo.Descripcion,
                 Condicion = articulo.Condicion,
                 Categoria = articulo.Categoria.Nombre
-
             });
-
-
         }
 
 
