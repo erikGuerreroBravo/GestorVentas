@@ -77,6 +77,42 @@ namespace GestorVentas.Controllers
 
             
         }
+
+
+        //GEt: api/Articulos/
+        [Authorize(Roles = "Almacenero,Administrador")]
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> BuscarCodigoIngreso([FromRoute] string codigo)
+        {
+            var articulo = await _contexto.Articulos
+                .Include(a => a.Categoria).Where(a=> a.Condicion== true)
+                .SingleOrDefaultAsync(a => a.Codigo == codigo);
+            if (articulo == null)
+            {
+                return NotFound();
+            }
+            return Ok(new ArticuloVM
+            {
+                IdArticulo = articulo.IdArticulo,
+                IdCategoria = articulo.IdCategoria,
+                Codigo = articulo.Codigo,
+                Nombre = articulo.Nombre,
+                Precio_Venta = articulo.Precio_Venta,
+                Stock = articulo.Stock,
+                Descripcion = articulo.Descripcion,
+                Condicion = articulo.Condicion,
+                Categoria = articulo.Categoria.Nombre
+
+            });
+
+
+        }
+
+
+
+
+
+
         //POST:api/Articulos/Crear
         [Authorize(Roles = "Almacenero,Administrador")]
         [HttpPost("[action]")]
