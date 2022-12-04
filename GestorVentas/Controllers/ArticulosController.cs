@@ -81,7 +81,7 @@ namespace GestorVentas.Controllers
 
         //GEt: api/Articulos/
         [Authorize(Roles = "Almacenero,Administrador")]
-        [HttpGet("[action]/{id}")]
+        [HttpGet("[action]/{codigo}")]
         public async Task<IActionResult> BuscarCodigoIngreso([FromRoute] string codigo)
         {
             var articulo = await _contexto.Articulos
